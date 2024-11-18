@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		<title>Satellite image slideshow</title>
+		<meta charset="utf-8">
+
+		<link rel="stylesheet" href="style.css">
+		<script src="slideshow.js"></script>
+  </head>
+
+  <body onload="initialize_page()">
+
+    <div id="top-bar">
+      <span id="fraction">(<span id="current-image">1</span> / <span id="total"></span>)</span>
+      <br>
+      <span id="filename"></span>
+
+    </div>
+
+    <div id="image-section">
+      <img id="slideshow" name="slide">
+    </div>
+
+    <div id="bottom-bar">
+      <button class="nav-buttons" onclick="change_image(Direction.Start)">&lt;&lt;</button>
+      <button class="nav-buttons" onclick="change_image(Direction.Previous)">&lt;</button>
+      <button class="nav-buttons" id="delete-button" width="50px" onclick="delete_image()">Delete</button>
+      <button class="nav-buttons" onclick="change_image(Direction.Next)">&gt;</button>
+      <button class="nav-buttons" onclick="change_image(Direction.End)">&gt;&gt;</button>
+    </div>
+    <hr>
+    <div id="number-input">
+      <p>Go to image</p>
+      <div id="slider-part">
+        <div>
+          <span id="start-image">1</span>
+          <input style="width: 250px" type="range" id="image-slider" min="1" max="" step="1" oninput="show_selected_value()" onchange="change_image(Direction.Slider)">
+          <span id="end-image"></span><br/>
+        </div>
+      </div>
+      <input type="number" id="input-field" onchange="change_image(Direction.Box)">
+    </div>
+    <hr>
+    <div id="filters">
+      <p>Filters</p>
+      <table>
+        <tr>
+          <td><label for="satellite">Satellite</label></td>
+
+          <td>
+            <select id="satellite" onchange="get_control_inputs(); prepare_image_list(); change_image(Direction.Start)">
+              <option value="all" selected>All</option>
+              <option value="M2-3">Meteor M2-3</option>
+              <option value="M2-4">Meteor M2-4</option>
+            </select>
+          </td>
+        </tr>
+        <td><label for="daytime">Time of the day</label></td>
+
+        <td>
+          <select id="daytime" onchange="get_control_inputs(); prepare_image_list(); change_image(Direction.Start)">
+            <option value="all" selected>All times</option>
+            <option value="daytime">During daytime</option>
+            <option value="nighttime">Evening / Night</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <th><label for="start-date">Start date</label></th>
+        <th><label for="end-date">End date</label></th>
+      </tr>
+      <tr>
+        <td><input type="date" id="start-date" onchange="apply_date()"></td>
+        <td><input type="date" id="end-date"></td>
+        <td><button id="date-ok" onclick="get_control_inputs(); prepare_image_list(); change_image(Direction.Start)">OK</button></td>
+      </tr>
+      <tr>
+        <td><button id="today" onclick="set_date_to_today(); get_control_inputs(); prepare_image_list(); change_image(Direction.Start)">Today</button></td>
+      </tr>
+    </table>
+
+    <button id="reset-filters" onclick="reset_filters(); get_control_inputs(); prepare_image_list(); change_image(Direction.Start)">Reset filters</button>
+
+    <table style="margin-top: 10px">
+      <tr>
+        <td><input type="checkbox" style="float: left" id="ask-before-deleting" onclick="set_ask_before_deleting()" checked></td>
+        <td><label for="ask-before-deleting">Ask before deleting?</label></td>
+      </tr>
+    </table>
+
+  </div>
+</body>
+
+</html>
