@@ -8,7 +8,7 @@ Since the slideshow is being served over the web, it is necessary to set up a we
 
 **Install Apache2 with PHP support**
 ```
-sudo apt install apache2 php8.1 libapache2-mod-php8.1
+sudo apt install apache2 php
 ```
 **Start the web server**
 ```
