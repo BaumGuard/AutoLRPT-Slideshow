@@ -41,6 +41,7 @@ var url = "";
 
 var ask_before_deleting = true;
 
+var date_selected = false;
 
 /*--------------------------------------------------------------------*/
 // General functions
@@ -389,7 +390,10 @@ function show_selected_value() {
 } // show_selected_value
 
 function apply_date () {
-  document.getElementById("end-date").value = document.getElementById("start-date").value;
+  if ( !date_selected ) {
+    document.getElementById("end-date").value = document.getElementById("start-date").value;
+    date_selected = true;
+  }
 } // apply_date
 
 function set_date_to_today () {
@@ -412,6 +416,7 @@ function reset_filters () {
   document.getElementById("daytime").value = "all";
   document.getElementById("start-date").value = "";
   document.getElementById("end-date").value = "";
+  date_selected = false;
 } // reset_filters
 
 function set_ask_before_deleting () {
