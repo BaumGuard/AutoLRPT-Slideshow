@@ -103,3 +103,12 @@ input[type=checkbox] {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+
+.button-icon {
+	width: 30px;
+}
+
+#image-slider {
+	width: 250px;
+}

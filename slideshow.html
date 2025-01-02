@@ -24,7 +24,7 @@
     <div id="bottom-bar">
       <button class="nav-buttons" onclick="change_image(Direction.Start)">↞</button>
       <button class="nav-buttons" onclick="change_image(Direction.Previous)">←</button>
-			<button class="nav-buttons" id="delete-button" width="50px" onclick="delete_image()"><img style="width: 30px" src="delete.svg"/></button>
+			<button class="nav-buttons" id="delete-button" width="50px" onclick="delete_image()"><img class="button-icon" src="delete.svg"/></button>
 			<button class="nav-buttons" onclick="change_image(Direction.Next)">→</button>
 			<button class="nav-buttons" onclick="change_image(Direction.End)">↠</button>
     </div>
@@ -34,7 +34,7 @@
       <div id="slider-part">
         <div>
           <span id="start-image">1</span>
-          <input style="width: 250px" type="range" id="image-slider" min="1" max="" step="1" oninput="show_selected_value()" onchange="change_image(Direction.Slider)">
+          <input type="range" id="image-slider" min="1" max="" step="1" oninput="show_selected_value()" onchange="change_image(Direction.Slider)">
           <span id="end-image"></span><br/>
         </div>
       </div>
