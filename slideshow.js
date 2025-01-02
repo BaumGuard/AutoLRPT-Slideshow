@@ -130,15 +130,28 @@ async function initialize_page () {
 
 
 function get_control_inputs () {
-  if ( document.getElementById("satellite").value != "all" )
-    satellite = document.getElementById("satellite").value;
-  else
-    satellite = "";
+	document.getElementById("satellite-check-container").style.cssText = "";
+	document.getElementById("daytime-check-container").style.cssText = "";
 
-  if ( document.getElementById("daytime").value != "all" )
-    time_of_day = document.getElementById("daytime").value;
-  else
-    time_of_day = "";
+  if ( document.getElementById("M2-3-check").checked && document.getElementById("M2-4-check").checked )
+    satellite = ""
+  else if (document.getElementById("M2-3-check").checked )
+    satellite = "M2-3"
+  else if (document.getElementById("M2-4-check").checked )
+    satellite = "M2-4"
+  else {
+		document.getElementById("satellite-check-container").style.border = "2px solid red";
+	}
+
+  if ( document.getElementById("daytime-check").checked && document.getElementById("nighttime-check").checked )
+    time_of_day = ""
+  else if (document.getElementById("daytime-check").checked )
+    time_of_day = "daytime"
+  else if (document.getElementById("nighttime-check").checked )
+    time_of_day = "nighttime"
+  else {
+		document.getElementById("daytime-check-container").style.border = "2px solid red";
+	}
 
   const null_date = new Date(0);
 
@@ -166,17 +179,34 @@ function set_html_items () {
     document.getElementById("image-slider").value = current_image;
     document.getElementById("input-field").value = current_image;
 
-    if (satellite != "")
-      document.getElementById("satellite").value = satellite;
-    else
-      document.getElementById("satellite").value = "all";
+    if (satellite == "") {
+			document.getElementById("M2-3-check").checked;
+			document.getElementById("M2-4-check").checked;
+		}
+    else if (satellite == "M2-3") {
+      document.getElementById("M2-3-check").checked;
+			document.getElementById("M2-4-check").checked = false;
+		}
+		else if (satellite == "M2-3") {
+      document.getElementById("M2-3-check").checked = false;
+			document.getElementById("M2-4-check").checked;
+		}
 
-    if (time_of_day != "")
-      document.getElementById("daytime").value = time_of_day;
-    else
-      document.getElementById("daytime").value = "all";
+    if (time_of_day == "") {
+			document.getElementById("daytime-check").checked;
+			document.getElementById("nighttime-check").checked;
+		}
+    else if (time_of_day == "daytime") {
+      document.getElementById("daytime-check").checked;
+			document.getElementById("nighttime-check").checked = false;
+		}
+		else if (time_of_day == "nighttime") {
+      document.getElementById("daytime-check").checked = false;
+			document.getElementById("nighttime-check").checked;
+		}
 
-    document.getElementById("start-date").value = start_date;
+
+		document.getElementById("start-date").value = start_date;
     document.getElementById("end-date").value = end_date;
 
     url.searchParams.set("imageNr", current_image);
@@ -412,8 +442,10 @@ function set_date_to_today () {
 
 
 function reset_filters () {
-  document.getElementById("satellite").value = "all";
-  document.getElementById("daytime").value = "all";
+	document.getElementById("M2-3-check").checked = true;
+	document.getElementById("M2-4-check").checked = true;
+	document.getElementById("daytime-check").checked = true;
+	document.getElementById("nighttime-check").checked = true;
   document.getElementById("start-date").value = "";
   document.getElementById("end-date").value = "";
   date_selected = false;

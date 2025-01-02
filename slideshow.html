@@ -22,11 +22,11 @@
     </div>
 
     <div id="bottom-bar">
-      <button class="nav-buttons" onclick="change_image(Direction.Start)">&lt;&lt;</button>
-      <button class="nav-buttons" onclick="change_image(Direction.Previous)">&lt;</button>
-      <button class="nav-buttons" id="delete-button" width="50px" onclick="delete_image()">Delete</button>
-      <button class="nav-buttons" onclick="change_image(Direction.Next)">&gt;</button>
-      <button class="nav-buttons" onclick="change_image(Direction.End)">&gt;&gt;</button>
+      <button class="nav-buttons" onclick="change_image(Direction.Start)">↞</button>
+      <button class="nav-buttons" onclick="change_image(Direction.Previous)">←</button>
+			<button class="nav-buttons" id="delete-button" width="50px" onclick="delete_image()"><img style="width: 30px" src="delete.svg"/></button>
+			<button class="nav-buttons" onclick="change_image(Direction.Next)">→</button>
+			<button class="nav-buttons" onclick="change_image(Direction.End)">↠</button>
     </div>
     <hr>
     <div id="number-input">
@@ -48,21 +48,25 @@
           <td><label for="satellite">Satellite</label></td>
 
           <td>
-            <select id="satellite" onchange="get_control_inputs(); prepare_image_list(); change_image(Direction.Start)">
-              <option value="all" selected>All</option>
-              <option value="M2-3">Meteor M2-3</option>
-              <option value="M2-4">Meteor M2-4</option>
-            </select>
+						<div id="satellite-check-container">
+							<input type="checkbox" id="M2-3-check" name="satellite-select" checked="true" onchange="get_control_inputs(); prepare_image_list(); change_image(Direction.Start)">
+							<label for="M2-3-check">Meteor-M2 3</label>
+							<br>
+							<input type="checkbox" id="M2-4-check" name="satellite-select" checked="true" onchange="get_control_inputs(); prepare_image_list(); change_image(Direction.Start)">
+							<label for="M2-4-check">Meteor-M2 4</label>
+						</div>
           </td>
         </tr>
         <td><label for="daytime">Time of the day</label></td>
 
         <td>
-          <select id="daytime" onchange="get_control_inputs(); prepare_image_list(); change_image(Direction.Start)">
-            <option value="all" selected>All times</option>
-            <option value="daytime">During daytime</option>
-            <option value="nighttime">Evening / Night</option>
-          </select>
+					<div id="daytime-check-container">
+						<input type="checkbox" id="daytime-check" name="daytime-select" checked="true" onchange="get_control_inputs(); prepare_image_list(); change_image(Direction.Start)">
+						<label for="M2-3-check">Daytime</label>
+						<br>
+						<input type="checkbox" id="nighttime-check" name="daytime-select" checked="true" onchange="get_control_inputs(); prepare_image_list(); change_image(Direction.Start)">
+						<label for="M2-4-check">Nighttime</label>
+					</div>
         </td>
       </tr>
     </table>
