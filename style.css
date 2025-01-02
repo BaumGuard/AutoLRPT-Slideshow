@@ -69,7 +69,6 @@
 
 #input-field {
 	width: 60px;
-	height: 30px;
 }
 
 #satellite, #daytime {
@@ -87,23 +86,22 @@ td {
 	font-weight: bold;
 	font-size: 20pt;
 	background-color: none;
-	border-radius: 10px;
-	border: solid 3px;
+	/*border-radius: 10px;
+	border: solid 3px;*/
 }
 #start-date, #end-date {
 	height: 30px;
 }
+/*
 #reset-filters, #date-ok {
 	height: 30px;
 }
+*/
 
 input[type=checkbox] {
-	width: 20px;
 	height: 20px;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	width: 20px;
 }
-
 
 .button-icon {
 	width: 30px;
@@ -111,4 +109,9 @@ input[type=checkbox] {
 
 #image-slider {
 	width: 250px;
+}
+
+.check-container {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
