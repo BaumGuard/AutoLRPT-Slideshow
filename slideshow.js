@@ -1,5 +1,6 @@
 /* Data definitions */
 
+/* Available satellite names */
 var sat_names = [
   "M2-3",
   "M2-4"
@@ -42,8 +43,8 @@ var ask_before_deleting = true;
 
 var date_selected = false;
 
-/*--------------------------------------------------------------------*/
-// General functions
+/*-------------------------------------------------------*/
+/* GENERAL FUNCTIONS */
 
 async function initialize_page () {
   try {
@@ -57,7 +58,9 @@ async function initialize_page () {
   }
 
   // Retrieving the URL parameters
-  const url_parameters = new URLSearchParams(window.location.search);
+  const url_parameters = new URLSearchParams(
+    window.location.search
+  );
   url = new URL(window.location.href);
 
   for (const [key, value] of url_parameters) {
@@ -66,35 +69,59 @@ async function initialize_page () {
         if ( /^\d+$/.test(value) )
           current_image = parseInt(value);
         else
-          console.log("Invalid URL parameter value for 'imageNr' : " + value + " (Must be an integer)");
+          console.log(
+            "Invalid URL parameter value for 'imageNr' : " + 
+            value + 
+            " (Must be an integer)"
+          );
         break;
 
       case "satellite":
         if ( sat_names.includes(value) )
           satellite = value;
         else
-          console.log("Invalid URL parameter value for 'satellite' : " + value + " (Available satellites: " + sat_names + ")");
+          console.log(
+            "Invalid URL parameter value for 'satellite' : " + 
+            value + 
+            " (Available satellites: " + 
+            sat_names + 
+            ")"
+          );
         break;
 
       case "time_of_day":
         if ( day_times.includes(value) )
           time_of_day = value;
         else
-          console.log("Invalid URL parameter value for 'time_of_day' : " + value + " (Valid values: " + day_times + ")");
+          console.log(
+            "Invalid URL parameter value for 'time_of_day' : " + 
+            value + 
+            " (Valid values: " + 
+            day_times + 
+            ")"
+          );
         break;
 
       case "start_date":
         if ( /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(value) )
           start_date = Date.parse(value);
         else
-          console.log("Invalid URL parameter value for 'start_date' : " + value + " (Must have the format YYYY-MM-DD)");
+          console.log(
+            "Invalid URL parameter value for 'start_date' : " + 
+            value + 
+            " (Must have the format YYYY-MM-DD)"
+          );
         break;
 
       case "end_date":
         if ( /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(value) )
           end_date = Date.parse(value);
         else
-          console.log("Invalid URL parameter value for 'end_date' : " + value + " (Must have the format YYYY-MM-DD)");
+          console.log(
+            "Invalid URL parameter value for 'end_date' : " + 
+            value + 
+            " (Must have the format YYYY-MM-DD)"
+          );
         break;
 
       case "date":
@@ -110,7 +137,11 @@ async function initialize_page () {
           end_date = yesterday;
         }
         else {
-          console.log("Invalid URL parameter value for 'date' : " + value + " (Valid values [today, yesterday])");
+          console.log(
+            "Invalid URL parameter value for 'date' : " + 
+            value + 
+            " (Valid values [today, yesterday])"
+          );
         }
         break;
 
@@ -129,27 +160,37 @@ async function initialize_page () {
 
 
 function get_control_inputs () {
-	document.getElementById("satellite-check-container").style.cssText = "";
-	document.getElementById("daytime-check-container").style.cssText = "";
+	document.getElementById("satellite-check-container")
+    .style.cssText = "";
+	document.getElementById("daytime-check-container")
+    .style.cssText = "";
 
-  if ( document.getElementById("M2-3-check").checked && document.getElementById("M2-4-check").checked )
+  if ( 
+      document.getElementById("M2-3-check").checked && 
+      document.getElementById("M2-4-check").checked 
+  )
     satellite = ""
   else if (document.getElementById("M2-3-check").checked )
     satellite = "M2-3"
   else if (document.getElementById("M2-4-check").checked )
     satellite = "M2-4"
   else {
-		document.getElementById("satellite-check-container").style.border = "2px solid red";
+		document.getElementById("satellite-check-container")
+      .style.border = "2px solid red";
 	}
 
-  if ( document.getElementById("daytime-check").checked && document.getElementById("nighttime-check").checked )
+  if ( 
+        document.getElementById("daytime-check").checked && 
+        document.getElementById("nighttime-check").checked 
+  )
     time_of_day = ""
   else if (document.getElementById("daytime-check").checked )
     time_of_day = "daytime"
   else if (document.getElementById("nighttime-check").checked )
     time_of_day = "nighttime"
   else {
-		document.getElementById("daytime-check-container").style.border = "2px solid red";
+		document.getElementById("daytime-check-container")
+      .style.border = "2px solid red";
 	}
 
   const null_date = new Date(0);
@@ -274,7 +315,9 @@ function change_image (direction) {
       break;
 
     case Direction.Slider:
-      current_image = parseInt( document.getElementById("image-slider").value );
+      current_image = parseInt( 
+        document.getElementById("image-slider").value
+      );
       break;
 
     case Direction.Box:
@@ -319,7 +362,11 @@ async function delete_image () {
   var confirm = false;
 
   if (ask_before_deleting)
-    confirm = window.confirm("Do you really want to delete "+current_image_path+"?");
+    confirm = window.confirm(
+      "Do you really want to delete " +
+      current_image_path +
+      "?"
+    );
   else
     confirm = true;
 
@@ -358,8 +405,8 @@ async function delete_image () {
   }
 } // delete_image
 
-	/*-----------------------------------------------------------*/
-	// Auxiliary functions
+/*-------------------------------------------------------*/
+/* AUXILIARY FUNCTIONS */
 
 function convert_timestamp (timestamp) {
   let new_timestamp = "";
@@ -391,7 +438,10 @@ function is_in_date_range(timestamp) {
   if (start_date == "" && end_date == "")
     return true;
 
-  return (timestamp.getTime() >= new_start_date.getTime() && timestamp.getTime() < new_end_date.getTime());
+  return (
+    timestamp.getTime() >= new_start_date.getTime() && 
+    timestamp.getTime() < new_end_date.getTime()
+  );
 } // is_in_date_range
 
 function matches_with_time_of_day (filename) {
@@ -411,16 +461,18 @@ function matches_with_time_of_day (filename) {
 } // matches_with_time_of_day
 
 
-/*-------------------------------------------------------------*/
-// Frontend functions
+/*-------------------------------------------------------*/
+/* FRONTEND FUNCTIONS */
 
 function show_selected_value() {
-  document.getElementById("input-field").value = document.getElementById("image-slider").value;
+  document.getElementById("input-field").value =
+    document.getElementById("image-slider").value;
 } // show_selected_value
 
 function apply_date () {
   if ( !date_selected ) {
-    document.getElementById("end-date").value = document.getElementById("start-date").value;
+    document.getElementById("end-date").value = 
+      document.getElementById("start-date").value;
     date_selected = true;
   }
 } // apply_date
@@ -457,6 +509,7 @@ function set_ask_before_deleting () {
 
 
 function load_uncompressed_image () {
-	var uncompressed_image_path = current_image_path.replace( "images/compressed", "images/" );
+	var uncompressed_image_path = current_image_path
+    .replace( "images/compressed", "images/" );
 	window.location.href = uncompressed_image_path;
 }
