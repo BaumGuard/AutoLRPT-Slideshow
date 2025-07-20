@@ -1,4 +1,3 @@
-
 /* Data definitions */
 
 var sat_names = [
@@ -455,3 +454,9 @@ function set_ask_before_deleting () {
   ask_before_deleting = !ask_before_deleting;
   console.log(ask_before_deleting);
 } // set_ask_before_deleting
+
+
+function load_uncompressed_image () {
+	var uncompressed_image_path = current_image_path.replace( "images/compressed", "images/" );
+	window.location.href = uncompressed_image_path;
+}
