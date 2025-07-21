@@ -409,18 +409,20 @@ async function delete_image () {
 /* AUXILIARY FUNCTIONS */
 
 function convert_timestamp (timestamp) {
+  let offset = 18;
+	
   let new_timestamp = "";
-  new_timestamp += timestamp.substring(7+0,7+4);
+  new_timestamp += timestamp.substring(offset+0,offset+4);
   new_timestamp += '-';
-  new_timestamp += timestamp.substring(7+4,7+6);
+  new_timestamp += timestamp.substring(offset+4,offset+6);
   new_timestamp += '-';
-  new_timestamp += timestamp.substring(7+6,7+8);
+  new_timestamp += timestamp.substring(offset+6,offset+8);
   new_timestamp += 'T';
-  new_timestamp += timestamp.substring(7+9,7+11);
+  new_timestamp += timestamp.substring(offset+9,offset+11);
   new_timestamp += ':';
-  new_timestamp += timestamp.substring(7+11,7+13);
+  new_timestamp += timestamp.substring(offset+11,offset+13);
   new_timestamp += ':';
-  new_timestamp += timestamp.substring(7+13,7+15);
+  new_timestamp += timestamp.substring(offset+13,offset+15);
 
   return new_timestamp;
 } // convert_timestamp
